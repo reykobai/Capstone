@@ -1,0 +1,272 @@
+﻿@model ProjectCollaborationSystem.Models.Information_Project
+
+@{
+    ViewBag.Title = "Index";
+    int wapakz = 0;
+}
+@foreach (var items in Model.teaminfo)
+{
+    if (Convert.ToInt32(Session["id"]) == @items.inform.InformationID)
+    {
+        wapakz = 1;
+
+    }
+
+}
+
+@if (wapakz == 1)
+{
+    using (Html.BeginForm("DisplayProjet", "Project", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        {
+            <div class="col-lg-12">
+                <div class="col-md-12">
+                    <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
+                    </div>
+                </div>
+            </div>
+            <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+                <div class="page-header pull-left">
+                    <div class="page-title" style="font-size:18px;">
+                        <b><i class="fa fa-folder"></i> @Model.project.ProjectTitle </b>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                </div>
+            </div>
+            <div class="page-content" style="font-size:12px;">
+                <div class="panel panel-orange">
+                    @*<div class="panel-heading">Projects</div>*@
+                    <div class="panel-body ">
+
+                        <p>Status: <b>@Model.project.ProjectStatus</b></p>
+
+                        <p> Project Manager: <b><a href="@Url.Action("Index", "Profile", new { id=@Model.info.InformationID} )">@Model.info.FirstName @Model.info.LastName</a></b></p>
+                        <p>Description: <b>@Model.project.ProjectDescription</b></p>
+                        <p>Due Date: <b>@Model.project.DueDate</b></p>
+                        <p>Priority: <b>@Model.project.ProjectPriority</b></p>
+
+
+                        @if (Convert.ToInt32(Session["id"]) == @Model.info.InformationID)
+                        {
+                            <hr />
+                            <p>Change Status:</p>
+
+                            if (@Model.project.ProjectStatus == "Resolved")
+                            {
+                                <a href="@Url.Action("Reopen", "Project", new { id = @Model.project.ProjectID }, null)">
+                                    &bull;   Re-open
+                                </a>
+                            }
+                            else if (@Model.project.ProjectStatus == "In Progress")
+                            {
+
+                                <a href="@Url.Action("Resolve", "Project", new { id = @Model.project.ProjectID }, null)">
+                                    &bull;   Resolve
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("InProgress", "Project", new { id = @Model.project.ProjectID }, null)">
+                                    &bull;   In Progress
+                                </a><br />
+                                <a href="@Url.Action("Resolve", "Project", new { id = @Model.project.ProjectID }, null)">
+                                    &bull;   Resolve
+                                </a>
+                            }
+                            <br /><br />
+                           <p style="color:red;">@TempData["error"]</p>
+
+                            <hr />
+                            @Html.ActionLink("Edit", "editProject", "Project", new { id = @Model.project.ProjectID }, null)
+
+                        }
+
+                    </div>
+
+
+
+                </div>
+
+
+                <button class="btn btn-default" type="submit">@Html.ActionLink("Add Task", "Index", "Task", new { id = @Model.project.ProjectID }, null)</button>
+
+
+                <br />
+                <br />
+                @*---------------------------------------tasks-------------------------------------------------*@
+                <div class="panel panel-orange">
+                    <div class="panel-heading">Task(s)</div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+
+                                    <th>Title</th>
+                                    <th>DueDate</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                    <th>Assignee</th>
+                                    <th></th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.taskinfo)
+                                {
+                                    <tr>
+
+                                        <td> @item.tasked.TaskTitle</td>
+                                        <td> @item.tasked.DueDate </td>
+                                        <td> @item.tasked.TaskStatus</td>
+                                        <td> @item.tasked.TaskPriority </td>
+                                        <td>@item.info.FirstName @item.info.LastName
+                                        <td>
+                                        <td>
+                                            @Html.ActionLink("Open", "DisplayTask", "Task", new { id = @item.tasked.TaskID }, null)
+
+                                        </td>
+
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr />
+                @*--------------------------------------endTask--------------------------------------------------------*@
+                @*Comment Section*@
+
+                <div class="tabbable">
+
+                    <div class="panel panel-orange">
+                        <br />
+                        @*<div class="panel-heading" > <i class="fa fa-comments-o"></i> Comments</div>*@
+                        <ul class="nav nav-tabs " style="font-size:12px;margin-left:10px;">
+                            <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-comments-o"></i> Comments</a></li>
+                            <li><a href="#two" data-toggle="tab"><i class="fa fa-history"></i> History</a></li>
+
+                        </ul>
+                        <div class="panel-body">
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="one">
+                                    <textarea class="form-control " name="CommentMessage" placeholder="Comment Here!" required></textarea>
+
+                                    <div class="form-group mbn">
+
+                                        <div class="form-actions text-right pal">
+                                            <button type="submit" class="btn btn-default">
+                                                Submit
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    @foreach (var item in Model.cinfo)
+                                    {
+
+
+                                        <div class="form-inline" style="display:block;">
+
+                                            @*<img src=@item.info.ImagePath class="img-circle" width="60" style="margin-left:10px;">*@
+
+
+
+                                            <div class="details">
+
+                                                <p>
+                                                    <b><a href="@Url.Action("Index", "Profile", new { id=@item.info.InformationID} )">@item.info.FirstName @item.info.LastName</a></b> @item.comments.DateAdded
+                                                    <br /> &nbsp; <i>@item.comments.CommentMessage</i>
+                                                    <br />
+                                                    @if (Convert.ToInt32(Session["id"]) == @item.info.InformationID)
+                                                    {
+                                                        @Html.ActionLink("Delete", "DeleteComment", "Project", new { id = @item.comments.CommentID, @Model.project.ProjectID }, null);
+                                                    }
+                                                </p>
+
+
+
+                                            </div>
+                                        </div>
+                                        <hr />
+                                    }
+                                </div>
+                                <div class="tab-pane" id="two">
+                                    @foreach (var item in Model.historys)
+                                    {
+
+
+                                        <div class="form-inline" style="display:block;">
+
+                                            @*<img src=@item.info.ImagePath class="img-circle" width="60" style="margin-left:10px;">*@
+
+
+
+                                            <div class="details">
+                                               
+                                                <p>
+                                                    @if (item.HistoryStat == "join")
+                                                    {
+
+                                                    <p> &bull;  @item.Action </p>
+                                                        <p> &nbsp; &nbsp; @item.DateAdded</p>
+                                                    }
+                                                    else
+                                                    { 
+                                                   
+                                                        <p>
+                                                            &bull;  @item.Action </p>
+                                                        <p> &nbsp; &nbsp; @item.DateAdded</p>
+                                                    
+
+                                                    }
+
+                                                    </p>
+                                                
+
+                                                </div>
+                                            </div>
+
+                                    }
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                @*--------------------------------------endTask--------------------------------------------------------*@
+
+            </div>
+
+
+
+        }
+    }
+
+
+}
+else
+{
+    <div class="panel panel-orange">
+        <div class="panel-heading">Error!</div>
+        <div class="panel-body">
+
+
+            <p style="">You are not allowed to view this page.</p>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,150 @@
+﻿@model ProjectCollaborationSystem.Models.Information
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    {
+
+        <div class="panel panel-orange" style="width:90%;margin-bottom:90px;">
+            <div class="panel-heading"> <i class="fa fa-user"></i> @Model.FirstName @Model.LastName</div>
+            <div class="panel-body">
+
+
+                <div class="row mtl">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="text-center mbl"><img src=@Model.ImagePath alt="" class="img-circle" style="width: 100px; height: 100px;background-color:red;" />
+                            <br /><br />
+                                <div class="form-group">
+
+                                    <div class="text-center mbl">
+                                        <button class="btn btn-default">
+                                            <i class="fa fa-upload"></i>&nbsp;
+                                            @Html.ActionLink("Upload", "editProfile", "Profile", new { id = @Model.InformationID }, null)
+                                        </button>
+                                    </div>
+
+
+                                </div>
+                            
+                            </div>
+
+                        </div>
+                        <table class="table table-striped table-hover">
+                            <tbody>
+
+                                @*Username*@
+                                <tr>
+                                    <td>User Name</td>
+                                
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="input-icon right">
+                                                <i class="fa fa-user"></i>
+                                                <input id="inputEmail" type="text" value="@Model.Username" class="form-control" name="usernames" disabled />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                @*Firstname*@
+                                <tr>
+                                    <td>First Name</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="input-icon right">
+                                                <i class="fa fa-user"></i>
+                                                <input id="inputEmail" type="text" value="@Model.FirstName" class="form-control" name="fname" required />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                @*LastName*@
+                                <tr>
+                                    <td>Last Name</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="input-icon right">
+                                                <i class="fa fa-user"></i>
+                                                <input id="inputEmail" type="text" value="@Model.LastName" class="form-control" name="lname" required />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Email</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="input-icon right">
+                                                <i class="fa fa-envelope"></i>
+                                                <input  type="text" value="@Model.EmailAddress" class="form-control" name="emailAdd" disabled />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Contact Number</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="input-icon right">
+                                                <i class="fa fa-phone-square"></i>
+                                                <input id="inputEmail" type="number" value="@Model.ContactNumber" class="form-control" name="contactNumber" required />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>Member Since</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="input-icon right">
+                                                <i class="fa fa-calendar"></i>
+                                                <input id="inputEmail" type="text" value="@Model.DateAdded" class="form-control" name="dateAdded" disabled />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Specialty</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="input-icon right">
+                                                <i class="fa fa-briefcase"></i>
+                                                <input id="inputEmail" type="text" value="@Model.Specialty" class="form-control" name="specialty" required />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                       
+                        <div class="form-actions text-right pal">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+     
+       
+    }
+}

@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    {
+       
+        <div class="page-content">
+            <div id="tab-general">
+                <div class="row mbl">
+                    <div class="col-lg-12">
+                        <div class="col-md-12">
+                            <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-4">
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="panel panel-yellow">
+                                    <div class="panel-heading">
+                                        Login Form
+                                    </div>
+                                    <div class="panel-body pan">
+                                        <form action="#" class="form-horizontal">
+                                            <div class="form-body pal">
+
+                                                <p style="color:red;padding-bottom:5px;">@TempData["error"]</p>
+
+                                                <div class="form-group">
+                                                    <label for="inputName" class="col-md-3 control-label">
+                                                        Name
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-icon right">
+                                                            <i class="fa fa-user"></i>
+                                                            <input id="inputName" type="text" placeholder="" class="form-control" name="usernames" required/>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                </div>
+                                                <br />
+                                                <div class="form-group">
+                                                    <label for="inputPassword" class="col-md-3 control-label">
+                                                        Password
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <div class="input-icon right">
+                                                            <i class="fa fa-lock"></i>
+                                                            <input id="inputPassword" type="password" placeholder="" class="form-control" name="pword" required />
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                                <br />
+                                               
+                                            </div>
+                                            <br />
+                                       
+                                                <div class="form-group mbn">
+                                               
+                                                    <div class="form-actions text-right pal">
+                                                        <button type="submit" class="btn btn-primary">
+                                                            Login
+                                                        </button>
+                                                    </div>
+                                                </div>
+                              
+                               
+                                            <div class="form-group" >
+                                                <div class="col-md-12 control">
+                                                    <div style="border-top: 1px solid#888; padding-top:15px; padding-bottom:10px; font-size:85%">
+                                                        Don't have an account?
+                                                        @Html.ActionLink("Sign Up now!", "SignUp", "Login")
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+}

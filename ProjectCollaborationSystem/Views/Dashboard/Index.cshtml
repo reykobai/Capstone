@@ -1,0 +1,169 @@
+﻿@model ProjectCollaborationSystem.Models.Project_Task
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    {
+            <div class="col-lg-12">
+                <div class="col-md-12">
+                    <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
+                    </div>
+                </div>
+            </div>
+        <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+            <div class="page-header pull-left">
+                <div class="page-title">
+                    Dashboard
+                </div>
+            </div>
+            <ol class="breadcrumb page-breadcrumb pull-right">
+                <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                <li class="hidden"><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                <li class="active">Dashboard</li>
+            </ol>
+            <div class="clearfix">
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="tabbable">
+
+                <div class="panel panel-orange">
+
+
+                    <ul class="nav nav-tabs panel-heading" style="font-size:12px;">
+                        <li class="active"><a href="#one" data-toggle="tab"><img src="~/Images/project.png" style="height:25px;width:25px;" />Projects</a></li>
+                        <li><a href="#two" data-toggle="tab"><img src="~/Images/task_icon.jpg" style="height:20px;width:20px;" /> Tasks</a></li>
+                        <li><a href="#three" data-toggle="tab"><img src="~/Images/subtask.png" style="height:20px;width:20px;" /> Subtasks</a></li>
+
+                    </ul>
+                    <div class="panel-body">
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="one">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Title</th>
+                                            <th>Date Added</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                            <th>Priority</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.projects)
+                                        {
+                                            <tr>
+
+                                                <td> @item.ProjectTitle </td>
+                                                <td> @item.DateAdded </td>
+                                                <td> @item.DueDate </td>
+                                                <td> @item.ProjectStatus </td>
+                                                <td> @item.ProjectPriority </td>
+                                                <td>@Html.ActionLink("Open", "DisplayProjet", "Project", new { id = @item.ProjectID }, null)</td>
+
+
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <hr />
+                                <p style="float:right;">  @Html.ActionLink("View All Projects", "ViewAllProjects", "Project")</p>
+                            </div>
+                            @*Pending*@
+
+                            <div class="tab-pane" id="two">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Title</th>
+                                            <th>Date Added</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                            <th>Priority</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.tasks)
+                                        {
+                                            <tr>
+
+                                                <td> @item.TaskTitle </td>
+                                                <td> @item.DateAdded </td>
+                                                <td> @item.DueDate </td>
+                                                <td> @item.TaskStatus</td>
+                                                <td> @item.TaskPriority </td>
+                                                <td>@Html.ActionLink("Open", "DisplayTask", "Task", new { id = @item.TaskID }, null)</td>
+
+
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <p style="float:right;">  @Html.ActionLink("View All Tasks", "ViewAllTasks", "Task")</p>
+                            </div>
+
+                            @*Current*@
+                            <div class="tab-pane" id="three">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Title</th>
+                                            <th>Date Added</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                            <th>Priority</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.subtasks)
+                                        {
+                                            <tr>
+
+                                                <td> @item.SubtaskTitle </td>
+                                                <td> @item.DateAdded </td>
+                                                <td> @item.DueDate </td>
+                                                <td> @item.SubtaskStatus</td>
+                                                <td> @item.SubtaskPriority </td>
+                                                <td>@Html.ActionLink("Open", "DisplaySubtask", "Subtask", new { id = @item.SubtaskID }, null)</td>
+
+
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <p style="float:right;">  @Html.ActionLink("View All Projects", "ViewAllSubtasks", "Subtask")</p>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+            @*End content*@
+        </div>
+    
+    
+
+
+    }
+}
+

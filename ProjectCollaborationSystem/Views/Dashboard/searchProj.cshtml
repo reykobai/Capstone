@@ -1,0 +1,83 @@
+﻿@model ProjectCollaborationSystem.Models.Information_Project
+
+@{
+    ViewBag.Title = "searchProj";
+}
+
+<div class="panel panel-orange">
+    <div class="panel-heading">Members</div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+              
+                    <th>Title</th>
+                    <th>Date Added</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.projects)
+                {
+                    <tr>
+                       
+                        <td> @item.ProjectTitle </td>
+                        <td> @item.DateAdded </td>
+                        <td> @item.DueDate </td>
+                        <td> @item.ProjectStatus </td>
+                        <td> @item.ProjectPriority </td>
+                        <td>@Html.ActionLink("Open", "DisplayProjet", "Project", new { id = @item.ProjectID }, null)</td>
+
+
+
+                    </tr>
+                }
+
+                @foreach (var item in Model.task)
+                {
+                    <tr>
+                      
+                        <td> @item.TaskTitle </td>
+                        <td> @item.DateAdded </td>
+                        <td> @item.DueDate </td>
+                        <td> @item.TaskStatus</td>
+                        <td> @item.TaskPriority </td>
+                        <td>@Html.ActionLink("Open", "DisplayTask", "Task", new { id = @item.TaskID }, null)</td>
+
+
+
+                    </tr>
+                }
+
+
+                @foreach (var item in Model.subtasking)
+                {
+                    <tr>
+                     
+                        <td> @item.SubtaskTitle </td>
+                        <td> @item.DateAdded </td>
+                        <td> @item.DueDate </td>
+                        <td> @item.SubtaskStatus</td>
+                        <td> @item.SubtaskPriority </td>
+                        <td>@Html.ActionLink("Open", "DisplaySubtask", "Subtask", new { id = @item.SubtaskID }, null)</td>
+
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+
+    </div>
+</div>
+
+
+

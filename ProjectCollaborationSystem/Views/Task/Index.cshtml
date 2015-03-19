@@ -1,0 +1,123 @@
+﻿@model IEnumerable<ProjectCollaborationSystem.Models.Information>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Index", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    {
+        <div class="page-content">
+            <div id="tab-general">
+                <div class="row mbl">
+                    <div class="col-lg-12">
+                        <div class="col-md-12">
+                            <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+
+                            <div class="col-lg-9">
+
+                                <div class="panel panel-orange">
+                                    <div class="panel-heading">
+                                        Add New Task
+                                    </div>
+                                    <div class="panel-body pan">
+                                        <form action="#">
+                                            <div class="form-body pal">
+                                                @*Title*@
+                                                <div class="form-group">
+                                                    <div class="input-icon right">
+                                                        <i class="fa fa-file-o"></i>
+                                                        <input id="inputName" name="tasktitle" type="text" placeholder="Title" class="form-control" required />
+                                                    </div>
+                                                </div>
+
+                                                @*Description*@
+                                                <div class="form-group">
+                                                    <textarea rows="5" name="taskdesc" class="form-control" placeholder="Description" required></textarea>
+                                                </div>
+
+                                                @*Priority*@
+                                                <div class="form-group">
+                                                    <label>Priority</label>
+                                                    <select class="form-control" name="taskprio" required>
+
+                                                        <option value="Low">Low</option>
+                                                        <option value="Medium">Medium</option>
+                                                        <option value="High">High</option>
+                                                    </select>
+                                                </div>
+
+                                                @*Due Date*@
+                                                <div class="form-group">
+                                                    <label>Due Date</label>
+                                                    <div class="input-group date datetimepicker">
+                                                        <input type="date" class="form-control" value="@System.DateTime.Now" placeholder="@System.DateTime.Now" data-date=@System.DateTime.Now name="taskdue" required>
+                                                        <span class="input-group-addon">
+                                                            <span class="fa fa-calendar"></span>
+                                                        </span>
+
+                                                    </div>
+
+                                                    <p style="color:red;">@TempData["error"]</p>
+                                                </div>
+
+                                         
+
+
+                                                @*Assignee*@
+                                                <div class="form-group">
+                                                    <label>Assignee</label>
+                                                    <select class="form-control" name="taskassign" required>
+
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <option value=@item.InformationID>@item.FirstName @item.LastName (@item.EmailAddress)</option>
+
+                                                        }
+                                                    </select>
+                                                </div>
+                                                
+
+
+                                                <div class="form-group">
+                                                    <label>Upload File</label>
+
+
+                                                    <input type="file" name="taskUploadFile"  />
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <div class="col-lg-4">
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-actions text-right pal">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+}

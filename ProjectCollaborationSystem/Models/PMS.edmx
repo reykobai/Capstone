@@ -1,0 +1,899 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjectManagementSystemModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="CommentMessage" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="InformationID" Type="int" Nullable="false" />
+          <Property Name="ProjectID" Type="int" />
+          <Property Name="TaskID" Type="int" />
+          <Property Name="SubtaskID" Type="int" />
+          <Property Name="CommentStatus" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="InformationID" />
+            <PropertyRef Name="Action" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="int" />
+          <Property Name="TaskID" Type="int" />
+          <Property Name="SubtaskID" Type="int" />
+          <Property Name="InformationID" Type="int" Nullable="false" />
+          <Property Name="Action" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Information">
+          <Key>
+            <PropertyRef Name="InformationID" />
+          </Key>
+          <Property Name="InformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Specialty" Type="varchar" MaxLength="100" />
+          <Property Name="ImagePath" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Invite">
+          <Key>
+            <PropertyRef Name="InviteID" />
+          </Key>
+          <Property Name="InviteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailAdd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" Nullable="false" />
+          <Property Name="ProjectDescription" Type="varchar" MaxLength="250" />
+          <Property Name="ProjectStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="ProjectPriority" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="InformationID" Type="int" Nullable="false" />
+          <Property Name="FileUploaded" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Subtask">
+          <Key>
+            <PropertyRef Name="SubtaskID" />
+          </Key>
+          <Property Name="SubtaskID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubtaskTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" Nullable="false" />
+          <Property Name="SubtaskDescription" Type="varchar" MaxLength="250" />
+          <Property Name="SubtaskStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="SubtaskPriority" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="InformationID" Type="int" Nullable="false" />
+          <Property Name="TaskID" Type="int" Nullable="false" />
+          <Property Name="FileUploaded" Type="varchar" MaxLength="50" />
+          <Property Name="ProjectID" Type="int" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="TaskID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" Nullable="false" />
+          <Property Name="TaskDescription" Type="varchar" MaxLength="250" />
+          <Property Name="TaskStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="TaskPriority" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="InformationID" Type="int" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="FileUploaded" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="InformationID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Comment_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_History_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_History_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_History_Subtask">
+          <End Role="Subtask" Type="Self.Subtask" Multiplicity="0..1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subtask">
+              <PropertyRef Name="SubtaskID" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="SubtaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_History_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invite_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Invite" Type="Self.Invite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Invite">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subtask_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Subtask" Type="Self.Subtask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Subtask">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subtask_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="Subtask" Type="Self.Subtask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="Subtask">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectManagementSystemModel1StoreContainer">
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Information" EntityType="Self.Information" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invite" EntityType="Self.Invite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subtask" EntityType="Self.Subtask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History" EntityType="Self.History" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [History].[ID] AS [ID], 
+    [History].[ProjectID] AS [ProjectID], 
+    [History].[TaskID] AS [TaskID], 
+    [History].[SubtaskID] AS [SubtaskID], 
+    [History].[InformationID] AS [InformationID], 
+    [History].[Action] AS [Action], 
+    [History].[DateAdded] AS [DateAdded]
+    FROM [dbo].[History] AS [History]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Comment_Information" Association="Self.FK_Comment_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Project" Association="Self.FK_Comment_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Task" Association="Self.FK_Comment_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="fk_History_Information" Association="Self.fk_History_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="fk_History_Project" Association="Self.fk_History_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="fk_History_Subtask" Association="Self.fk_History_Subtask">
+            <End Role="Subtask" EntitySet="Subtask" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="fk_History_Task" Association="Self.fk_History_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invite_Project" Association="Self.FK_Invite_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Invite" EntitySet="Invite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Information" Association="Self.FK_Project_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subtask_Information" Association="Self.FK_Subtask_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Subtask" EntitySet="Subtask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subtask_Task" Association="Self.FK_Subtask_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Subtask" EntitySet="Subtask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Information" Association="Self.FK_Task_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Project" Association="Self.FK_Task_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Information" Association="Self.FK_Team_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Project" Association="Self.FK_Team_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectManagementSystemModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="CommentMessage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InformationID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectID" Type="Int32" />
+          <Property Name="TaskID" Type="Int32" />
+          <Property Name="SubtaskID" Type="Int32" />
+          <Property Name="CommentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Information" Relationship="Self.FK_Comment_Information" FromRole="Comment" ToRole="Information" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Comment_Project" FromRole="Comment" ToRole="Project" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Comment_Task" FromRole="Comment" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Information">
+          <Key>
+            <PropertyRef Name="InformationID" />
+          </Key>
+          <Property Name="InformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Specialty" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Information" FromRole="Information" ToRole="Comment" />
+          <NavigationProperty Name="Histories" Relationship="Self.fk_History_Information" FromRole="Information" ToRole="History" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Project_Information" FromRole="Information" ToRole="Project" />
+          <NavigationProperty Name="Subtasks" Relationship="Self.FK_Subtask_Information" FromRole="Information" ToRole="Subtask" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Information" FromRole="Information" ToRole="Task" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK_Team_Information" FromRole="Information" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Invite">
+          <Key>
+            <PropertyRef Name="InviteID" />
+          </Key>
+          <Property Name="InviteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailAdd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Invite_Project" FromRole="Invite" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProjectDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="ProjectPriority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InformationID" Type="Int32" Nullable="false" />
+          <Property Name="FileUploaded" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Project" FromRole="Project" ToRole="Comment" />
+          <NavigationProperty Name="Information" Relationship="Self.FK_Project_Information" FromRole="Project" ToRole="Information" />
+          <NavigationProperty Name="Invites" Relationship="Self.FK_Invite_Project" FromRole="Project" ToRole="Invite" />
+          <NavigationProperty Name="Histories" Relationship="Self.fk_History_Project" FromRole="Project" ToRole="History" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Project" FromRole="Project" ToRole="Task" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK_Team_Project" FromRole="Project" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Subtask">
+          <Key>
+            <PropertyRef Name="SubtaskID" />
+          </Key>
+          <Property Name="SubtaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubtaskTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SubtaskDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SubtaskStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="SubtaskPriority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InformationID" Type="Int32" Nullable="false" />
+          <Property Name="TaskID" Type="Int32" Nullable="false" />
+          <Property Name="FileUploaded" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectID" Type="Int32" />
+          <NavigationProperty Name="Information" Relationship="Self.FK_Subtask_Information" FromRole="Subtask" ToRole="Information" />
+          <NavigationProperty Name="Histories" Relationship="Self.fk_History_Subtask" FromRole="Subtask" ToRole="History" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Subtask_Task" FromRole="Subtask" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="TaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TaskDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TaskStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="TaskPriority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InformationID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="FileUploaded" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Task" FromRole="Task" ToRole="Comment" />
+          <NavigationProperty Name="Information" Relationship="Self.FK_Task_Information" FromRole="Task" ToRole="Information" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Task_Project" FromRole="Task" ToRole="Project" />
+          <NavigationProperty Name="Subtasks" Relationship="Self.FK_Subtask_Task" FromRole="Task" ToRole="Subtask" />
+          <NavigationProperty Name="Histories" Relationship="Self.fk_History_Task" FromRole="Task" ToRole="History" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="InformationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Information" Relationship="Self.FK_Team_Information" FromRole="Team" ToRole="Information" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Team_Project" FromRole="Team" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="InformationID" />
+            <PropertyRef Name="Action" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" />
+          <Property Name="TaskID" Type="Int32" />
+          <Property Name="SubtaskID" Type="Int32" />
+          <Property Name="InformationID" Type="Int32" Nullable="false" />
+          <Property Name="Action" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Information" Relationship="Self.fk_History_Information" FromRole="History" ToRole="Information" />
+          <NavigationProperty Name="Project" Relationship="Self.fk_History_Project" FromRole="History" ToRole="Project" />
+          <NavigationProperty Name="Subtask" Relationship="Self.fk_History_Subtask" FromRole="History" ToRole="Subtask" />
+          <NavigationProperty Name="Task" Relationship="Self.fk_History_Task" FromRole="History" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_Comment_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_History_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subtask_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Subtask" Type="Self.Subtask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Subtask">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invite_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Invite" Type="Self.Invite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Invite">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_History_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_History_Subtask">
+          <End Role="Subtask" Type="Self.Subtask" Multiplicity="0..1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subtask">
+              <PropertyRef Name="SubtaskID" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="SubtaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subtask_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="Subtask" Type="Self.Subtask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="Subtask">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_History_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectManagementSystemEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="Information" EntityType="Self.Information" />
+          <EntitySet Name="Invites" EntityType="Self.Invite" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="Subtasks" EntityType="Self.Subtask" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="Teams" EntityType="Self.Team" />
+          <EntitySet Name="Histories" EntityType="Self.History" />
+          <AssociationSet Name="FK_Comment_Information" Association="Self.FK_Comment_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Project" Association="Self.FK_Comment_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Task" Association="Self.FK_Comment_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_History_Information" Association="Self.fk_History_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="History" EntitySet="Histories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Information" Association="Self.FK_Project_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subtask_Information" Association="Self.FK_Subtask_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Subtask" EntitySet="Subtasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Information" Association="Self.FK_Task_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Information" Association="Self.FK_Team_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invite_Project" Association="Self.FK_Invite_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Invite" EntitySet="Invites" />
+          </AssociationSet>
+          <AssociationSet Name="fk_History_Project" Association="Self.fk_History_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="History" EntitySet="Histories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Project" Association="Self.FK_Task_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Project" Association="Self.FK_Team_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="fk_History_Subtask" Association="Self.fk_History_Subtask">
+            <End Role="Subtask" EntitySet="Subtasks" />
+            <End Role="History" EntitySet="Histories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subtask_Task" Association="Self.FK_Subtask_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Subtask" EntitySet="Subtasks" />
+          </AssociationSet>
+          <AssociationSet Name="fk_History_Task" Association="Self.fk_History_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="History" EntitySet="Histories" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectManagementSystemModel1StoreContainer" CdmEntityContainer="ProjectManagementSystemEntities1">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="CommentMessage" ColumnName="CommentMessage" />
+                <ScalarProperty Name="InformationID" ColumnName="InformationID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="SubtaskID" ColumnName="SubtaskID" />
+                <ScalarProperty Name="CommentStatus" ColumnName="CommentStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Information">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Information">
+              <MappingFragment StoreEntitySet="Information">
+                <ScalarProperty Name="InformationID" ColumnName="InformationID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Pword" ColumnName="Pword" />
+                <ScalarProperty Name="Specialty" ColumnName="Specialty" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invites">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Invite">
+              <MappingFragment StoreEntitySet="Invite">
+                <ScalarProperty Name="InviteID" ColumnName="InviteID" />
+                <ScalarProperty Name="EmailAdd" ColumnName="EmailAdd" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+                <ScalarProperty Name="ProjectStatus" ColumnName="ProjectStatus" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="ProjectPriority" ColumnName="ProjectPriority" />
+                <ScalarProperty Name="InformationID" ColumnName="InformationID" />
+                <ScalarProperty Name="FileUploaded" ColumnName="FileUploaded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subtasks">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Subtask">
+              <MappingFragment StoreEntitySet="Subtask">
+                <ScalarProperty Name="SubtaskID" ColumnName="SubtaskID" />
+                <ScalarProperty Name="SubtaskTitle" ColumnName="SubtaskTitle" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="SubtaskDescription" ColumnName="SubtaskDescription" />
+                <ScalarProperty Name="SubtaskStatus" ColumnName="SubtaskStatus" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="SubtaskPriority" ColumnName="SubtaskPriority" />
+                <ScalarProperty Name="InformationID" ColumnName="InformationID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="FileUploaded" ColumnName="FileUploaded" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="TaskTitle" ColumnName="TaskTitle" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="TaskDescription" ColumnName="TaskDescription" />
+                <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="TaskPriority" ColumnName="TaskPriority" />
+                <ScalarProperty Name="InformationID" ColumnName="InformationID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="FileUploaded" ColumnName="FileUploaded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="InformationID" ColumnName="InformationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Histories">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.History">
+              <MappingFragment StoreEntitySet="History">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="SubtaskID" ColumnName="SubtaskID" />
+                <ScalarProperty Name="InformationID" ColumnName="InformationID" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

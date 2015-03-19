@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ba04f8750a0c442581483c75859b913c" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjectManagementSystemModel1.Comment" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementSystemModel1.Information" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementSystemModel1.Invite" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementSystemModel1.Project" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementSystemModel1.Subtask" Width="1.5" PointX="13.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementSystemModel1.Task" Width="1.5" PointX="8.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementSystemModel1.Team" Width="1.5" PointX="8.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementSystemModel1.History" Width="1.5" PointX="10.5" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.FK_Comment_Information" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.FK_Comment_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.FK_Comment_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.fk_History_Information" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.FK_Project_Information" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.FK_Subtask_Information" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.FK_Task_Information" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.FK_Team_Information" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.FK_Invite_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.fk_History_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.FK_Task_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.FK_Team_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.fk_History_Subtask" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.FK_Subtask_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementSystemModel1.fk_History_Task" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

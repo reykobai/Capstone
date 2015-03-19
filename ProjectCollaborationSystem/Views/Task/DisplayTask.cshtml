@@ -1,0 +1,270 @@
+﻿@model ProjectCollaborationSystem.Models.Information_Project
+
+@{
+    ViewBag.Title = "Index";
+    int wapakz = 0;
+}
+@foreach (var items in Model.teaminfo)
+{
+    if (Convert.ToInt32(Session["id"]) == @items.inform.InformationID)
+    {
+
+        wapakz = 1;
+    }
+}
+
+@if (wapakz == 1)
+{ 
+
+using (Html.BeginForm("DisplayTask", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            {
+
+                <div class="col-lg-12">
+                    <div class="col-md-12">
+                        <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
+                        </div>
+                    </div>
+                </div>
+                <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+                    <div class="page-header pull-left">
+                        <div class="page-title" style="font-size:18px;">
+                            <b> <i class="fa fa-tasks"></i> @Model.tasking.TaskTitle </b>
+                        </div>
+                    </div>
+                    <ol class="breadcrumb page-breadcrumb pull-right">
+                        <li><i class="fa fa-home"></i>&nbsp;<a href="@Url.Action("Index", "Dashboard", null)">Dashboard</a><i class="fa fa-angle-right"></i></li>
+                        <li><i class="fa fa-folder"></i><a href="@Url.Action("DisplayProjet", "Project", new { id = @Model.project.ProjectID }, null)">@Model.project.ProjectTitle</a></li>
+                    </ol>
+                    <div class="clearfix">
+                    </div>
+                </div>
+    <div class="page-content">
+        <div class="panel panel-orange" style="font-size:12px;">
+            @*<div class="panel-heading">Projects</div>*@
+            <div class="panel-body">
+                <p>Status: <b>@Model.tasking.TaskStatus</b> </p>
+                <p> Assignee: <b><a href="@Url.Action("Index", "Profile", new { id=@Model.info.InformationID} )">@Model.info.FirstName @Model.info.LastName</a></b></p>
+                <p> Description: <b>@Model.tasking.TaskDescription</b></p>
+                <p> Due Date: <b>@Model.tasking.DueDate</b></p>
+
+                @if ((Convert.ToInt32(Session["id"]) == @Model.info.InformationID) || (Convert.ToInt32(Session["id"]) == @Model.project.InformationID))
+                {
+                    <hr />
+                    <p>Change Status:</p>
+                    if (@Model.tasking.TaskStatus == "Resolved")
+                    {
+                        <a href="@Url.Action("Reopen", "Task", new { id = @Model.tasking.TaskID }, null)">
+                            &bull;  Re-open
+                        </a>
+                    }
+                    else if (@Model.tasking.TaskStatus == "In Progress")
+                    {
+                        <a href="@Url.Action("Resolve", "Task", new { id = @Model.tasking.TaskID }, null)">
+                            &bull;  Resolve
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("InProgress", "Task", new { id = @Model.tasking.TaskID }, null)">
+                            &bull;   In Progress
+                        </a><br />
+                        <a href="@Url.Action("Resolve", "Task", new { id = @Model.tasking.TaskID }, null)">
+                            &bull;   Resolve
+                        </a>
+                    }
+
+                    
+                    
+                    <input id="file-0" class="file" type="file">
+
+                      <br /><br />
+                           <p style="color:red;">@TempData["error"]</p>
+                    
+                    <hr />
+                    @Html.ActionLink("Edit", "editTask", "Task", new { id = Model.tasking.TaskID, Model.tasking.ProjectID }, null)
+
+                }
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+        <button class="btn btn-default" type="submit">@Html.ActionLink("Add Subtask", "Index", "Subtask", new { id = @Model.tasking.TaskID, @Model.tasking.ProjectID }, null)</button>
+
+        <br />
+        <br />
+        @*---------------------------------------tasks-------------------------------------------------*@
+        <div class="panel panel-orange" style="font-size:12px;">
+            <div class="panel-heading" style="font-size:12px;">Subtask(s)</div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+                            <th>Title</th>
+                            <th>DueDate</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Assignee</th>
+
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in @Model.subinfo)
+                        {
+                            <tr>
+
+                                <td> @item.subtask.SubtaskTitle</td>
+                                <td> @item.subtask.DueDate </td>
+                                <td> @item.subtask.SubtaskStatus</td>
+                                <td> @item.subtask.SubtaskPriority </td>
+                                <td>@item.info.FirstName @item.info.LastName</td>
+                                <td>
+                                    @Html.ActionLink("Open", "DisplaySubtask", "Subtask", new { id = @item.subtask.SubtaskID, @Model.tasking.ProjectID }, null)
+
+
+                                </td>
+
+
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        @*--------------------------------------endTask--------------------------------------------------------*@
+        <div class="tabbable">
+
+            <div class="panel panel-orange">
+                <br />
+                @*<div class="panel-heading" > <i class="fa fa-comments-o"></i> Comments</div>*@
+                <ul class="nav nav-tabs " style="font-size:12px;margin-left:10px;">
+                    <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-comments-o"></i> Comments</a></li>
+                    <li><a href="#two" data-toggle="tab"><i class="fa fa-history"></i> History</a></li>
+
+                </ul>
+
+                <div class="panel-body">
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="one">
+                            <textarea class="form-control " name="CommentMessage" placeholder="Comment Here!" required></textarea>
+
+                            <div class="form-group mbn">
+
+                                <div class="form-actions text-right pal">
+                                    <button type="submit" class="btn btn-default">
+                                        Submit
+
+                                    </button>
+                                </div>
+                            </div>
+                            <hr />
+                            @foreach (var item in Model.cinfo)
+                            {
+
+
+                                <div class="form-inline" style="display:block;">
+
+                                    @*<img src=@item.info.ImagePath class="img-circle" width="60" style="margin-left:10px;">*@
+
+
+
+                                    <div class="details">
+
+                                        <p>
+                                            <b><a href="@Url.Action("Index", "Profile", new { id = @item.info.InformationID })">@item.info.FirstName @item.info.LastName</a></b> @item.comments.DateAdded
+                                            <br /> &nbsp; <i>@item.comments.CommentMessage</i>
+                                            <br />
+                                            @if (Convert.ToInt32(Session["id"]) == @item.info.InformationID)
+                                            {
+                                                @Html.ActionLink("Delete", "DeleteComment", "Task", new { id = @item.comments.CommentID, @Model.tasking.TaskID}, null);
+                                            }
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <hr />
+                            }
+                        </div>
+                        <div class="tab-pane" id="two">
+                            @foreach (var item in Model.Hist_inf)
+                            {
+
+
+                                <div class="form-inline" style="display:block;">
+
+                                    @*<img src=@item.info.ImagePath class="img-circle" width="60" style="margin-left:10px;">*@
+
+
+
+                                    <div class="details">
+
+                                        <p>
+                                            &bull;  @item.history.Action by
+
+
+                                            <b><a href="@Url.Action("Index", "Profile", new { id = @item.information.InformationID })">@item.information.FirstName @item.information.LastName</a></b>
+                                            <br /> &nbsp; &nbsp; @item.history.DateAdded
+
+
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+        @*--------------------------------------endTask--------------------------------------------------------*@
+
+    </div>
+
+
+
+
+
+
+
+
+
+            }
+        }
+
+
+}
+else
+{
+    <div class="panel panel-orange">
+        <div class="panel-heading">Error!</div>
+        <div class="panel-body">
+
+
+            <p style="">You are not allowed to view this page.</p>
+        </div>
+    </div>
+}

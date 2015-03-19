@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ProjectCollaborationSystem.Models.Task>
+
+@{
+    ViewBag.Title = "DelayedProject";
+}
+
+<div class="panel panel-orange">
+    <div class="panel-heading">Current Tasks</div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+
+                    <th>Title</th>
+                    <th>Date Added</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+
+                        <td> @item.TaskTitle </td>
+                        <td> @item.DateAdded </td>
+                        <td> @item.DueDate </td>
+                        <td> @item.TaskStatus </td>
+                        <td> @item.TaskPriority </td>
+                        <td>@Html.ActionLink("Open", "DisplayTask", "Task", new { id = @item.TaskID }, null)</td>
+
+
+
+                    </tr>
+
+
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+

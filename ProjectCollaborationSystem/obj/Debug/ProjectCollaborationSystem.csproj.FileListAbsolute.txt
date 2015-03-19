@@ -1,0 +1,113 @@
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\ProjectCollaborationSystem.dll.config
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\ProjectCollaborationSystem.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\ProjectCollaborationSystem.pdb
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Antlr3.Runtime.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\EntityFramework.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\EntityFramework.SqlServer.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.Core.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Cookies.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Facebook.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Google.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.OAuth.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Twitter.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Web.Infrastructure.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Newtonsoft.Json.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Owin.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Helpers.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Mvc.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Optimization.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Razor.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.Deployment.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.Razor.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\WebGrease.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Helpers.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Mvc.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Optimization.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Razor.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.Deployment.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.Razor.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Newtonsoft.Json.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Antlr3.Runtime.pdb
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\EntityFramework.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\EntityFramework.SqlServer.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.Core.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Facebook.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Cookies.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.OAuth.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Google.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Twitter.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\obj\Debug\ProjectCollaborationSystem.csprojResolveAssemblyReference.cache
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\obj\Debug\ProjectCollaborationSystem.dll
+c:\users\reyjr\documents\visual studio 2013\Projects\ProjectCollaborationSystem\ProjectCollaborationSystem\obj\Debug\ProjectCollaborationSystem.pdb
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\ProjectCollaborationSystem.dll.config
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\ProjectCollaborationSystem.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\ProjectCollaborationSystem.pdb
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Antlr3.Runtime.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\EntityFramework.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\EntityFramework.SqlServer.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Newtonsoft.Json.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Owin.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Helpers.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Mvc.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Optimization.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Razor.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.Deployment.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.Razor.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\WebGrease.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Newtonsoft.Json.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Helpers.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Mvc.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Optimization.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.Razor.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.Deployment.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\System.Web.WebPages.Razor.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Antlr3.Runtime.pdb
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\EntityFramework.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\EntityFramework.SqlServer.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\obj\Debug\ProjectCollaborationSystem.dll
+C:\Users\ReyJR\Desktop\video\ProjectCollaborationSystem\ProjectCollaborationSystem\obj\Debug\ProjectCollaborationSystem.pdb

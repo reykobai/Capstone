@@ -1,0 +1,13 @@
+﻿@{
+
+    if (Session["id"] != null)
+    {
+        Layout = "~/Views/Shared/Index.cshtml";    
+     
+    }
+    else
+    {
+        Layout = "~/Views/Shared/IndexLogin.cshtml";
+      
+    }
+}

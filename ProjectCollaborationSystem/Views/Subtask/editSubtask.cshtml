@@ -1,0 +1,267 @@
+﻿@model ProjectCollaborationSystem.Models.Information_Project
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Convert.ToInt32(Session["id"]) == @Model.project.InformationID)
+{
+using (Html.BeginForm("editSubtask", "Subtask", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    {
+        <div class="page-content">
+            <div id="tab-general">
+                <div class="row mbl">
+                    <div class="col-lg-12">
+                        <div class="col-md-12">
+                            <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+
+                            <div class="col-lg-9">
+
+                                <div class="panel panel-orange">
+                                    <div class="panel-heading">
+                                        Edit Subtask
+
+                                        <ul class=" pull-right">
+                                            <li><i class="fa fa-folder"></i><a href="@Url.Action("DisplaySubtask", "Subtask", new { id = @Model.subtask.SubtaskID}, null)" style="color: #ffffff;text-decoration:none; "> @Model.subtask.SubtaskTitle</a></li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="panel-body pan">
+                                        <form action="" method="post">
+                                            <div class="form-body pal">
+                                                @*Title*@
+                                                <div class="form-group">
+                                                    <div class="input-icon right">
+                                                        <i class="fa fa-file-o"></i>
+                                                        <input id="inputName" name="subtasktitle" type="text" value="@Model.subtask.SubtaskTitle" class="form-control" required />
+                                                    </div>
+                                                </div>
+
+                                                @*Description*@
+                                                <div class="form-group">
+                                                    <textarea rows="5" name="subtaskdesc" class="form-control" required>@Model.subtask.SubtaskDescription</textarea>
+                                                </div>
+
+                                                @*Priority*@
+                                                <div class="form-group">
+                                                    <label>Priority</label>
+                                                    <select class="form-control" name="subtaskprio" required>
+                                                        <option selected=@Model.subtask.SubtaskPriority >@Model.subtask.SubtaskPriority</option>
+                                                        <option value="Low" >Low</option>
+                                                        <option value="Medium">Medium</option>
+                                                        <option value="High">High</option>
+                                                    </select>
+                                                </div>
+
+                                                @*Due Date*@
+                                                <div class="form-group">
+                                                    <label>Due Date</label>
+                                                    <div class="input-group date datetimepicker">
+                                                        <input type="text" id="datetimepicker" class="form-control" value="@Model.subtask.DueDate" data-date=@Model.subtask.DueDate name="subtaskdue" required />
+                                                        <span class="input-group-addon">
+                                                            <span class="fa fa-calendar"></span>
+                                                        </span>
+
+                                                    </div>
+                                                    <br />
+                                                    <p style="color:red;">@TempData["error"]</p>
+                                                </div>
+
+
+
+
+                                                @*Assignee*@
+                                                <div class="form-group">
+                                                    <label>Assignee</label>
+                                                    <select class="form-control" name="subtaskassign" required>
+
+                                                        @foreach (var item in Model.teaminfo)
+                                                        {
+                                                            <option value=@item.inform.InformationID>@item.inform.FirstName @item.inform.LastName (@item.inform.EmailAddress) </option>
+
+                                                        }
+
+
+                                                    </select>
+
+                                                    
+                                                </div>
+                                             
+
+
+
+                                                <div class="form-group">
+                                                    <label>Upload File</label>
+
+
+                                                    <input type="file" name="subtaskUploadFile"  />
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <div class="col-lg-4">
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-actions text-right pal">
+                                                <button type="submit" class="btn btn-primary">
+
+                                                    Submit
+
+
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+    
+    }
+}
+}
+else
+{
+    using (Html.BeginForm("editSubtaskAssignee", "Subtask", new{id=Model.subtask.SubtaskID},FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    {
+        <div class="page-content">
+            <div id="tab-general">
+                <div class="row mbl">
+                    <div class="col-lg-12">
+                        <div class="col-md-12">
+                            <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+
+                            <div class="col-lg-9">
+
+                                <div class="panel panel-orange">
+                                    <div class="panel-heading">
+                                        Edit Subtask
+                                    </div>
+                                    <div class="panel-body pan">
+                                        <form action="" method="post">
+                                            <div class="form-body pal">
+                                                @*Title*@
+                                                <div class="form-group">
+                                                    <div class="input-icon right">
+                                                        <i class="fa fa-file-o"></i>
+                                                        <input id="inputName" name="subtasktitle" type="text" value="@Model.subtask.SubtaskTitle" class="form-control" disabled />
+                                                    </div>
+                                                </div>
+
+                                                @*Description*@
+                                                <div class="form-group">
+                                                    <textarea rows="5" name="subtaskdesc" class="form-control" disabled>@Model.subtask.SubtaskDescription</textarea>
+                                                </div>
+
+                                                @*Priority*@
+                                                <div class="form-group">
+                                                    <label>Priority</label>
+                                                    <select class="form-control" name="subtaskprio" disabled>
+                                                        <option selected=@Model.subtask.SubtaskPriority>@Model.subtask.SubtaskPriority</option>
+                                                        <option value="Low">Low</option>
+                                                        <option value="Medium">Medium</option>
+                                                        <option value="High">High</option>
+                                                    </select>
+                                                </div>
+
+                                                @*Due Date*@
+                                                <div class="form-group">
+                                                    <label>Due Date</label>
+                                                    <div class="input-group date datetimepicker">
+                                                        <input type="text" id="datetimepicker" class="form-control" value="@Model.subtask.DueDate" data-date=@Model.subtask.DueDate name="subtaskdue" disabled />
+                                                        <span class="input-group-addon">
+                                                            <span class="fa fa-calendar"></span>
+                                                        </span>
+
+                                                    </div>
+
+
+                                                </div>
+
+
+
+
+                                                @*Assignee*@
+                                                <div class="form-group">
+                                                    <label>Assignee</label>
+                                                    <select class="form-control" name="subtaskassign" required>
+
+                                                        @foreach (var item in Model.teaminfo)
+                                                        {
+                                                            <option value=@item.inform.InformationID>@item.inform.FirstName @item.inform.LastName (@item.inform.EmailAddress) </option>
+
+                                                        }
+
+
+                                                    </select>
+
+                                                    
+                                                </div>
+                                             
+
+
+
+                                                <div class="form-group">
+                                                    <label>Upload File</label>
+
+
+                                                    <input type="file" name="subtaskUploadFile" />
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <div class="col-lg-4">
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-actions text-right pal">
+                                                <button type="submit" class="btn btn-primary">
+
+                                                    Submit
+
+
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+    
+    }
+}
+}
