@@ -12,20 +12,15 @@ namespace ProjectCollaborationSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class History
+    public partial class Chat
     {
-        public int ID { get; set; }
-        public Nullable<int> ProjectID { get; set; }
-        public Nullable<int> TaskID { get; set; }
-        public Nullable<int> SubtaskID { get; set; }
-        public Nullable<int> InformationID { get; set; }
-        public string Action { get; set; }
+        public int ChatID { get; set; }
+        public int ProjectID { get; set; }
+        public int InformationID { get; set; }
+        public string Message { get; set; }
         public Nullable<System.DateTime> DateAdded { get; set; }
-        public string HistoryStat { get; set; }
     
         public virtual Information Information { get; set; }
         public virtual Project Project { get; set; }
-        public virtual Subtask Subtask { get; set; }
-        public virtual Task Task { get; set; }
     }
 }

@@ -1,0 +1,96 @@
+﻿@model ProjectCollaborationSystem.Models.Team_Information
+
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm("SearchMember", "Member", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    {
+
+
+        <!--END TITLE & BREADCRUMB PAGE-->
+        <!--BEGIN CONTENT-->
+
+
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Member" name="searchMember" />
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+
+        <br />
+        @*<table>
+            <tr>
+                <td>
+                    <div class="panel panel-orange" style="width:250px;margin-top:0px;">
+                        <div class="panel-heading">Chat</div>
+                        <div class="panel-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.projectList)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href="" target="iframe_a" > @item.ProjectTitle</a>
+                                                   @*<iframe src="@Url.Action("Index","Chat")" width="1000" height="400"> Chat</iframe></td>*@@*</tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                    </td>
+                    <td><div style="border:solid;margin-top:-100px;" ><iframe src="@Url.Action("Index","Chat")" width="1000" height="450" frameborder="0"></iframe></div></td>
+                </tr>
+            </table>*@
+                                                <div class="panel panel-orange">
+                                                    <div class="panel-heading">Chat</div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+
+                                                                <div class="row mtl">
+                                                                    <div class="col-md-3" style=" overflow: scroll;height:500px;">
+                                                                        <table class="table table-hover" style="border-right: solid 1px #ddd;">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Project</th>
+
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @foreach (var item in Model.projectList)
+                                                                                {
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            &bull;  
+                                                                                            <a href="@Url.Action("Index", "Chat", new { id = @item.ProjectID }, null)" target="iframe_a">@item.ProjectTitle</a>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                }
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="col-md-9" style="  height: 500px; width: 74%; ">
+                                                                        <iframe src="@Url.Action("Index", "Chat")" style="height: 470px; width:100%; overflow: scroll;" frameborder="0" name="iframe_a"></iframe>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+    }
+}

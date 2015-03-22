@@ -30,5 +30,6 @@ namespace ProjectCollaborationSystem.Models
         public List<History> historys { get; set; }
 
         public List<History_Information> Hist_inf { get; set; }
+        public List<Chat_Info_Project> cip = new List<Chat_Info_Project>();
     }
 }

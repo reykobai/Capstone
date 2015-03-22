@@ -185,49 +185,53 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Chat.cs">
+      <DependentUpon>ProjectManagementSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Chat_Info_Project.cs" />
     <Compile Include="Models\Comment.cs">
-      <DependentUpon>PMS.tt</DependentUpon>
+      <DependentUpon>ProjectManagementSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\History.cs">
-      <DependentUpon>PMS.tt</DependentUpon>
+      <DependentUpon>ProjectManagementSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\History_Information.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Information.cs">
-      <DependentUpon>PMS.tt</DependentUpon>
+      <DependentUpon>ProjectManagementSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Information_Project.cs" />
     <Compile Include="Models\Invite.cs">
-      <DependentUpon>PMS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PMS.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PMS.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PMS.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PMS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PMS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PMS.edmx</DependentUpon>
+      <DependentUpon>ProjectManagementSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project.cs">
-      <DependentUpon>PMS.tt</DependentUpon>
+      <DependentUpon>ProjectManagementSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagementSystemModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagementSystemModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagementSystemModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagementSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagementSystemModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagementSystemModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Subtask.cs">
-      <DependentUpon>PMS.tt</DependentUpon>
+      <DependentUpon>ProjectManagementSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Task.cs">
-      <DependentUpon>PMS.tt</DependentUpon>
+      <DependentUpon>ProjectManagementSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project_Task.cs" />
     <Compile Include="Models\Task_information.cs" />
     <Compile Include="Models\Team.cs">
-      <DependentUpon>PMS.tt</DependentUpon>
+      <DependentUpon>ProjectManagementSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Subtask_Information.cs" />
     <Compile Include="Models\Team_Information.cs" />
@@ -236,6 +240,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\ProjectCollaborationSystem.dll" />
+    <Content Include="bin\ProjectCollaborationSystem.pdb" />
     <Content Include="Content\assets\date\datepicker\css\datepicker.css" />
     <Content Include="Content\assets\date\datepicker\js\bootstrap-datepicker.js" />
     <Content Include="Content\assets\date\daterangepicker\daterangepicker-bs2.css" />
@@ -734,22 +740,22 @@
     <Content Include="Content\assets\date\timepicker\spec\js\libs\jquery\package.json" />
     <Content Include="Content\assets\date\timepicker\spec\js\libs\jquery\README.md" />
     <Content Include="Content\assets\date\datepicker\less\datepicker.less" />
-    <EntityDeploy Include="Models\PMS.edmx">
+    <EntityDeploy Include="Models\ProjectManagementSystemModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PMS.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProjectManagementSystemModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\PMS.Context.tt">
+    <Content Include="Models\ProjectManagementSystemModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PMS.edmx</DependentUpon>
-      <LastGenOutput>PMS.Context.cs</LastGenOutput>
+      <DependentUpon>ProjectManagementSystemModel.edmx</DependentUpon>
+      <LastGenOutput>ProjectManagementSystemModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\PMS.edmx.diagram">
-      <DependentUpon>PMS.edmx</DependentUpon>
+    <Content Include="Models\ProjectManagementSystemModel.edmx.diagram">
+      <DependentUpon>ProjectManagementSystemModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\PMS.tt">
+    <Content Include="Models\ProjectManagementSystemModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PMS.edmx</DependentUpon>
-      <LastGenOutput>PMS.cs</LastGenOutput>
+      <DependentUpon>ProjectManagementSystemModel.edmx</DependentUpon>
+      <LastGenOutput>ProjectManagementSystemModel.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\fileinput.js" />
@@ -888,6 +894,8 @@
     <Content Include="Views\Task\ViewAllTasks.cshtml" />
     <Content Include="Views\Subtask\ViewAllSubtasks.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Chat\Chatmembers.cshtml" />
+    <Content Include="Views\Chat\ChatMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProjectManagementSystemModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ProjectManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="ChatID" />
+          </Key>
+          <Property Name="ChatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="InformationID" Type="int" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" />
+        </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="CommentID" />
@@ -23,16 +33,16 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
         <EntityType Name="History">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="InformationID" />
             <PropertyRef Name="Action" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProjectID" Type="int" />
           <Property Name="TaskID" Type="int" />
           <Property Name="SubtaskID" Type="int" />
-          <Property Name="InformationID" Type="int" Nullable="false" />
+          <Property Name="InformationID" Type="int" />
           <Property Name="Action" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="DateAdded" Type="datetime" />
+          <Property Name="HistoryStat" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Information">
           <Key>
@@ -69,7 +79,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
           <Property Name="DateAdded" Type="datetime" />
           <Property Name="ProjectPriority" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="InformationID" Type="int" Nullable="false" />
-          <Property Name="FileUploaded" Type="varchar" MaxLength="50" />
+          <Property Name="FileUploaded" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Subtask">
           <Key>
@@ -84,7 +94,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
           <Property Name="SubtaskPriority" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="InformationID" Type="int" Nullable="false" />
           <Property Name="TaskID" Type="int" Nullable="false" />
-          <Property Name="FileUploaded" Type="varchar" MaxLength="50" />
+          <Property Name="FileUploaded" Type="varchar" MaxLength="250" />
           <Property Name="ProjectID" Type="int" />
         </EntityType>
         <EntityType Name="Task">
@@ -100,7 +110,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
           <Property Name="TaskPriority" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="InformationID" Type="int" Nullable="false" />
           <Property Name="ProjectID" Type="int" Nullable="false" />
-          <Property Name="FileUploaded" Type="varchar" MaxLength="50" />
+          <Property Name="FileUploaded" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -110,6 +120,30 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
           <Property Name="ProjectID" Type="int" Nullable="false" />
           <Property Name="InformationID" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Chat_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Comment_Information">
           <End Role="Information" Type="Self.Information" Multiplicity="1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
@@ -147,7 +181,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_History_Information">
-          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
           <End Role="History" Type="Self.History" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Information">
@@ -290,7 +324,8 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProjectManagementSystemModel1StoreContainer">
+        <EntityContainer Name="ProjectManagementSystemModelStoreContainer">
+          <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Information" EntityType="Self.Information" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invite" EntityType="Self.Invite" Schema="dbo" store:Type="Tables" />
@@ -306,9 +341,18 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
     [History].[SubtaskID] AS [SubtaskID], 
     [History].[InformationID] AS [InformationID], 
     [History].[Action] AS [Action], 
-    [History].[DateAdded] AS [DateAdded]
+    [History].[DateAdded] AS [DateAdded], 
+    [History].[HistoryStat] AS [HistoryStat]
     FROM [dbo].[History] AS [History]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Chat_Information" Association="Self.FK_Chat_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Project" Association="Self.FK_Chat_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
           <AssociationSet Name="FK_Comment_Information" Association="Self.FK_Comment_Information">
             <End Role="Information" EntitySet="Information" />
             <End Role="Comment" EntitySet="Comment" />
@@ -374,7 +418,19 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ProjectManagementSystemModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ProjectManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="ChatID" />
+          </Key>
+          <Property Name="ChatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="InformationID" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Information" Relationship="Self.FK_Chat_Information" FromRole="Chat" ToRole="Information" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Chat_Project" FromRole="Chat" ToRole="Project" />
+        </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="CommentID" />
@@ -405,6 +461,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
           <Property Name="Pword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Specialty" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ImagePath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Chats" Relationship="Self.FK_Chat_Information" FromRole="Information" ToRole="Chat" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Information" FromRole="Information" ToRole="Comment" />
           <NavigationProperty Name="Histories" Relationship="Self.fk_History_Information" FromRole="Information" ToRole="History" />
           <NavigationProperty Name="Projects" Relationship="Self.FK_Project_Information" FromRole="Information" ToRole="Project" />
@@ -433,7 +490,8 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
           <Property Name="DateAdded" Type="DateTime" Precision="3" />
           <Property Name="ProjectPriority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="InformationID" Type="Int32" Nullable="false" />
-          <Property Name="FileUploaded" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FileUploaded" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Chats" Relationship="Self.FK_Chat_Project" FromRole="Project" ToRole="Chat" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Project" FromRole="Project" ToRole="Comment" />
           <NavigationProperty Name="Information" Relationship="Self.FK_Project_Information" FromRole="Project" ToRole="Information" />
           <NavigationProperty Name="Invites" Relationship="Self.FK_Invite_Project" FromRole="Project" ToRole="Invite" />
@@ -454,7 +512,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
           <Property Name="SubtaskPriority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="InformationID" Type="Int32" Nullable="false" />
           <Property Name="TaskID" Type="Int32" Nullable="false" />
-          <Property Name="FileUploaded" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FileUploaded" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="ProjectID" Type="Int32" />
           <NavigationProperty Name="Information" Relationship="Self.FK_Subtask_Information" FromRole="Subtask" ToRole="Information" />
           <NavigationProperty Name="Histories" Relationship="Self.fk_History_Subtask" FromRole="Subtask" ToRole="History" />
@@ -473,7 +531,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
           <Property Name="TaskPriority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="InformationID" Type="Int32" Nullable="false" />
           <Property Name="ProjectID" Type="Int32" Nullable="false" />
-          <Property Name="FileUploaded" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FileUploaded" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Task" FromRole="Task" ToRole="Comment" />
           <NavigationProperty Name="Information" Relationship="Self.FK_Task_Information" FromRole="Task" ToRole="Information" />
           <NavigationProperty Name="Project" Relationship="Self.FK_Task_Project" FromRole="Task" ToRole="Project" />
@@ -493,21 +551,45 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
         <EntityType Name="History">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="InformationID" />
             <PropertyRef Name="Action" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProjectID" Type="Int32" />
           <Property Name="TaskID" Type="Int32" />
           <Property Name="SubtaskID" Type="Int32" />
-          <Property Name="InformationID" Type="Int32" Nullable="false" />
+          <Property Name="InformationID" Type="Int32" />
           <Property Name="Action" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="HistoryStat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Information" Relationship="Self.fk_History_Information" FromRole="History" ToRole="Information" />
           <NavigationProperty Name="Project" Relationship="Self.fk_History_Project" FromRole="History" ToRole="Project" />
           <NavigationProperty Name="Subtask" Relationship="Self.fk_History_Subtask" FromRole="History" ToRole="Subtask" />
           <NavigationProperty Name="Task" Relationship="Self.fk_History_Task" FromRole="History" ToRole="Task" />
         </EntityType>
+        <Association Name="FK_Chat_Information">
+          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Information">
+              <PropertyRef Name="InformationID" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="InformationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Comment_Information">
           <End Role="Information" Type="Self.Information" Multiplicity="1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
@@ -545,7 +627,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_History_Information">
-          <End Role="Information" Type="Self.Information" Multiplicity="1" />
+          <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
           <End Role="History" Type="Self.History" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Information">
@@ -688,7 +770,8 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProjectManagementSystemEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ProjectManagementSystemEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Chats" EntityType="Self.Chat" />
           <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="Information" EntityType="Self.Information" />
           <EntitySet Name="Invites" EntityType="Self.Invite" />
@@ -697,6 +780,14 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
           <EntitySet Name="Tasks" EntityType="Self.Task" />
           <EntitySet Name="Teams" EntityType="Self.Team" />
           <EntitySet Name="Histories" EntityType="Self.History" />
+          <AssociationSet Name="FK_Chat_Information" Association="Self.FK_Chat_Information">
+            <End Role="Information" EntitySet="Information" />
+            <End Role="Chat" EntitySet="Chats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Project" Association="Self.FK_Chat_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Chat" EntitySet="Chats" />
+          </AssociationSet>
           <AssociationSet Name="FK_Comment_Information" Association="Self.FK_Comment_Information">
             <End Role="Information" EntitySet="Information" />
             <End Role="Comment" EntitySet="Comments" />
@@ -763,9 +854,20 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProjectManagementSystemModel1StoreContainer" CdmEntityContainer="ProjectManagementSystemEntities1">
+        <EntityContainerMapping StorageEntityContainer="ProjectManagementSystemModelStoreContainer" CdmEntityContainer="ProjectManagementSystemEntities2">
+          <EntitySetMapping Name="Chats">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel.Chat">
+              <MappingFragment StoreEntitySet="Chat">
+                <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="InformationID" ColumnName="InformationID" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Comment">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
                 <ScalarProperty Name="CommentID" ColumnName="CommentID" />
                 <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
@@ -779,7 +881,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Information">
-            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Information">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel.Information">
               <MappingFragment StoreEntitySet="Information">
                 <ScalarProperty Name="InformationID" ColumnName="InformationID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -795,7 +897,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Invites">
-            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Invite">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel.Invite">
               <MappingFragment StoreEntitySet="Invite">
                 <ScalarProperty Name="InviteID" ColumnName="InviteID" />
                 <ScalarProperty Name="EmailAdd" ColumnName="EmailAdd" />
@@ -804,7 +906,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Project">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel.Project">
               <MappingFragment StoreEntitySet="Project">
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
                 <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
@@ -819,7 +921,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Subtasks">
-            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Subtask">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel.Subtask">
               <MappingFragment StoreEntitySet="Subtask">
                 <ScalarProperty Name="SubtaskID" ColumnName="SubtaskID" />
                 <ScalarProperty Name="SubtaskTitle" ColumnName="SubtaskTitle" />
@@ -836,7 +938,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tasks">
-            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Task">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel.Task">
               <MappingFragment StoreEntitySet="Task">
                 <ScalarProperty Name="TaskID" ColumnName="TaskID" />
                 <ScalarProperty Name="TaskTitle" ColumnName="TaskTitle" />
@@ -852,7 +954,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Teams">
-            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.Team">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel.Team">
               <MappingFragment StoreEntitySet="Team">
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
@@ -861,7 +963,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Histories">
-            <EntityTypeMapping TypeName="ProjectManagementSystemModel1.History">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel.History">
               <MappingFragment StoreEntitySet="History">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
@@ -870,6 +972,7 @@ warning 6002: The table/view 'ProjectManagementSystem.dbo.History' does not have
                 <ScalarProperty Name="InformationID" ColumnName="InformationID" />
                 <ScalarProperty Name="Action" ColumnName="Action" />
                 <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="HistoryStat" ColumnName="HistoryStat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

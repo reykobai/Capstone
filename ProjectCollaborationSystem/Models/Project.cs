@@ -16,6 +16,7 @@ namespace ProjectCollaborationSystem.Models
     {
         public Project()
         {
+            this.Chats = new HashSet<Chat>();
             this.Comments = new HashSet<Comment>();
             this.Invites = new HashSet<Invite>();
             this.Histories = new HashSet<History>();
@@ -33,6 +34,7 @@ namespace ProjectCollaborationSystem.Models
         public int InformationID { get; set; }
         public string FileUploaded { get; set; }
     
+        public virtual ICollection<Chat> Chats { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual Information Information { get; set; }
         public virtual ICollection<Invite> Invites { get; set; }

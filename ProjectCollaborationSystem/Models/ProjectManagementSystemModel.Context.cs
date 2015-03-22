@@ -13,10 +13,10 @@ namespace ProjectCollaborationSystem.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ProjectManagementSystemEntities1 : DbContext
+    public partial class ProjectManagementSystemEntities2 : DbContext
     {
-        public ProjectManagementSystemEntities1()
-            : base("name=ProjectManagementSystemEntities1")
+        public ProjectManagementSystemEntities2()
+            : base("name=ProjectManagementSystemEntities2")
         {
         }
     
@@ -25,6 +25,7 @@ namespace ProjectCollaborationSystem.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Chat> Chats { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Information> Information { get; set; }
         public virtual DbSet<Invite> Invites { get; set; }

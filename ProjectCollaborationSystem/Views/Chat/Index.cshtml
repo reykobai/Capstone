@@ -1,14 +1,46 @@
-﻿@{ Layout = null; }
-<section class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <input type="text" id="msg" />
-            <input type="button" id="send" value="Send" />
-            <input type="hidden" id="chat-username" value="@ViewBag.Username" />
-            <input type="hidden" id="chat-group" value="@ViewBag.Group"/>
-            <ul id="messages">
+﻿@model ProjectCollaborationSystem.Models.Information_Project
 
-            </ul>
+
+@{Layout = null;  }
+
+
+<section class="container pull-right">
+    <p style="color:red;">@TempData["error"]</p>
+    <h2>@Model.project.ProjectTitle</h2>
+    <hr />
+    <div class="row" >
+        <div class="col-md-6 col-md-offset-3">
+            @*<input type="text" class="form-control" id="msg" />
+                <input type="button" id="send" value="Send" />*@
+
+            <div class="input-group">
+                <input type="text" placeholder="Chat here" required id="msg"
+                       style=" display: block;width: 90%;height: 34px;padding: 6px 12px;font-size: 14px;line-height: 1.42857143; color: #555;background-color: #fff;background-image: none;border: 1px solid #ccc;border-radius: 4px;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;" />
+
+                <div class="input-group-btn " >
+                    <button id="send" type="submit" style="display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: normal; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent; border-radius: 4px; margin-top: -34px; margin-left:90%;">
+                        Send
+                    </button>
+                </div>
+            </div>
+        
+           
+            <input type="hidden" id="chat-username" value="@ViewBag.Username" />
+            <input type="hidden" id="chat-group" value="@ViewBag.Group" />
+       
+            <ul id="messages"></ul>
+
+            @foreach (var item in Model.cip)
+            {
+                <ul>
+                    <li> <span style="font-size:10px">@item.chat.DateAdded</span> <strong>@item.info.FirstName @item.info.LastName: </strong>@item.chat.Message</li>
+                </ul>
+                
+          
+               
+            }
+            <input type="hidden" id="projectID" value="@Model.project.ProjectID" />
+            <input type="hidden" id="infoID" value=@Session["id"].ToString() />
         </div>
     </div>
 </section>
@@ -28,14 +60,14 @@
             $('#messages').append('<li>' + encodedName +
                 ':  ' + encodedMsg + '</li>');
         };
-        
+
         chat.client.broadcastGroupMessage = function (username, message, servertime) {
             var encodedMsg = $('<div />').text(message).html();
             var messageHtml = '<li> <span style="font-size:10px">{{servertime}}</span> <strong>{{username}}: </strong>{{message}}</li>';
             messageHtml = messageHtml.replace('{{servertime}}', servertime);
             messageHtml = messageHtml.replace('{{username}}', username);
             messageHtml = messageHtml.replace('{{message}}', message);
-            $('#messages').append(messageHtml);
+            $('#messages').prepend(messageHtml);
         }
 
         // Start the connection
@@ -45,12 +77,16 @@
 
             username = $('#chat-username').val();
             groupname = $('#chat-group').val();
+            projectID = $('#projectID').val();
+            infoID = $('#infoID').val();
+
 
             chat.server.setGroupChat(groupname);
 
             $("#send").click(function () {
                 // Call the chat method on the server
-                chat.server.sendToGroup(groupname, username, $('#msg').val());
+                chat.server.sendToGroup(groupname, username, $('#msg').val(), projectID, infoID);
+                //chat.server.sendToGroup(ProjectID, InformID, $('#msg').val());
             });
         });
 
